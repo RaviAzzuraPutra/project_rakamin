@@ -1,0 +1,47 @@
+services:
+  mysql:
+    image: mysql:9.5.0
+    container_name: mysql_rakamin
+    restart: unless-stopped
+    ports: 
+      - 3317:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_CHARSET=${MYSQL_CHARSET}
+      - MYSQL_COLLATION=${MYSQL_COLLATION}
+    volumes:
+      - "./mysql/rakamin_last.sql:/docker-entrypoint-initdb.d/rakamin_last.sql:ro"
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 11s
+      timeout: 5s
+      retries: 5
+      start_period: 32s
+  lapak-api:
+    image: rakamin-project:latest
+    container_name: lapak-api
+    restart: unless-stopped
+    ports:
+      - ${APP_PORT_NO_COLON}:${APP_PORT_NO_COLON}
+    environment:
+      - APP_PORT=${APP_PORT}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+    volumes: 
+      - .:/app
+    networks:
+      - app_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  
+networks:
+  app_network:
+    driver: bridge
