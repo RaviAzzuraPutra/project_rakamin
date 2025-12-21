@@ -8,7 +8,7 @@ type Produk struct {
 	Slug          *string `json:"slug"`
 	HargaReseller *string `json:"harga_reseller"`
 	HargaKonsumen *string `json:"harga_konsumen"`
-	Stok          int     `json:"stok"`
+	Stok          *int    `json:"stok"`
 	Deskripsi     *string `json:"deskripsi" gorm:"type:text"`
 	IDToko        *string `json:"id_toko" gorm:"type:char(36)"`
 	IDCategory    *string `json:"id_category" gorm:"type:char(36)"`

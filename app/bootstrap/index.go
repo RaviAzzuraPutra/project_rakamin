@@ -1,9 +1,11 @@
 package bootstrap
 
 import (
+	"last-project/app/bootstrap/registry"
 	"last-project/app/config"
 	"last-project/app/config/app_config"
 	"last-project/app/database"
+	"last-project/app/router/auth_router"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -27,6 +29,10 @@ func Bootstrap() {
 			"Message": "The application is running well.",
 		})
 	})
+
+	AuthModules := registry.AuthRegistry()
+
+	auth_router.AuthRouter(app, AuthModules.AuthController)
 
 	app.Listen(app_config.PORT)
 }
