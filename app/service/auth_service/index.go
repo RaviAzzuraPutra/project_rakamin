@@ -42,6 +42,18 @@ func (s *Auth_Service) Register(request *request.RegisterRequest) (*models.User,
 		return nil, errors.New("Email numbers cannot be empty")
 	}
 
+	existingEmail, errExistingEmail := s.repository.IsEmailExists(*request.Email)
+
+	if errExistingEmail == nil && existingEmail.ID != nil {
+		return nil, errors.New("Email Already Registered No Duplicates Allowed")
+	}
+
+	existingPhone, errExistingPhone := s.repository.IsPhoneExists(*request.Email)
+
+	if errExistingPhone == nil && existingPhone.ID != nil {
+		return nil, errors.New("Phone Already Registered No Duplicates Allowed")
+	}
+
 	userID := utils.GenerateUUID()
 	tokoID := utils.GenerateUUID()
 	Nama_Toko := "TOKO " + *request.Nama

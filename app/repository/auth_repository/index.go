@@ -30,3 +30,19 @@ func (repo *Auth_Repository) Login(email string) (*models.User, error) {
 
 	return &user, errLogin
 }
+
+func (repo *Auth_Repository) IsEmailExists(email string) (*models.User, error) {
+	var user models.User
+
+	errFind := repo.DB.Table("users").Where("email = ?", email).First(&user).Error
+
+	return &user, errFind
+}
+
+func (repo *Auth_Repository) IsPhoneExists(phone string) (*models.User, error) {
+	var user models.User
+
+	errFind := repo.DB.Table("users").Where("notelp = ?", phone).First(&user).Error
+
+	return &user, errFind
+}
