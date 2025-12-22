@@ -3,6 +3,7 @@ package toko_controller
 import (
 	"last-project/app/request"
 	"last-project/app/service/interface/toko_service_interface"
+	"last-project/app/utils"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -51,7 +52,7 @@ func (c *Toko_Controller) UpdateToko(ctx *fiber.Ctx) error {
 		})
 	}
 
-	tempPath := "./tmp/" + file.Filename
+	tempPath := utils.GenerateUUID()
 
 	if err := ctx.SaveFile(file, tempPath); err != nil {
 		return ctx.Status(500).JSON(fiber.Map{

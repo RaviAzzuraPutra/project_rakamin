@@ -47,7 +47,9 @@ func (s *Toko_Service) UpdateToko(userID string, request *request.Toko_Request) 
 		return nil, errors.New("No photo provided")
 	}
 
-	imageURL, errPhoto := utils.UploadFotoToCloudinary(*request.UrlFoto)
+	folderName := toko.NamaToko
+
+	imageURL, errPhoto := utils.UploadFotoToCloudinary(*request.UrlFoto, *folderName, *request.UrlFoto)
 
 	if errPhoto != nil {
 		return nil, errors.New(errPhoto.Error())

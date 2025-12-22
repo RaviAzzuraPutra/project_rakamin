@@ -9,12 +9,14 @@ import (
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 )
 
-func UploadFotoToCloudinary(filepath string) (string, error) {
+func UploadFotoToCloudinary(filepath string, folderName string, fileName string) (string, error) {
 	cld, err := cloudinary.NewFromParams(
 		cloudinary_config.CloudinaryConfig().CLOUDINARY_CLOUD_NAME,
 		cloudinary_config.CloudinaryConfig().CLOUDINARY_API_KEY,
 		cloudinary_config.CloudinaryConfig().CLOUDINARY_API_SECRET,
 	)
+
+	fullFolderPath := fmt.Sprintf("rakamin/toko/%s", folderName)
 
 	if err != nil {
 		fmt.Println("An error occurred while cloudinary. " + err.Error())
@@ -24,7 +26,8 @@ func UploadFotoToCloudinary(filepath string) (string, error) {
 		context.Background(),
 		filepath,
 		uploader.UploadParams{
-			Folder: "rakamin/toko",
+			Folder:   fullFolderPath,
+			PublicID: fileName,
 		},
 	)
 
