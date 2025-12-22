@@ -40,7 +40,7 @@ func (c *Auth_Controller) Register(ctx *fiber.Ctx) error {
 
 	return ctx.JSON(fiber.Map{
 		"Status":  200,
-		"Message": "Berhasil Registrasi",
+		"Message": "Register Succes",
 		"Data":    register,
 	})
 }
@@ -68,6 +68,7 @@ func (c *Auth_Controller) Login(ctx *fiber.Ctx) error {
 
 	return ctx.JSON(fiber.Map{
 		"Status":  200,
-		"Message": login,
+		"Message": "Login Succes",
+		"Data":    login,
 	})
 }

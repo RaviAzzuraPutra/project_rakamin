@@ -6,6 +6,7 @@ import (
 	"last-project/app/config/app_config"
 	"last-project/app/database"
 	"last-project/app/router/auth_router"
+	"last-project/app/router/toko_router"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -31,8 +32,10 @@ func Bootstrap() {
 	})
 
 	AuthModules := registry.AuthRegistry()
+	TokoModules := registry.Toko_Registry()
 
 	auth_router.AuthRouter(app, AuthModules.AuthController)
+	toko_router.TokoRouter(app, TokoModules.TokoController)
 
 	app.Listen(app_config.PORT)
 }

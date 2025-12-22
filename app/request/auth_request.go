@@ -1,14 +1,14 @@
 package request
 
 type RegisterRequest struct {
-	Nama     *string `json:"nama"`
-	Email    *string `json:"email"`
-	NoTelp   *string `json:"notelp"`
-	Password *string `json:"password"`
-	IsAdmin  *bool   `json:"is_admin"`
+	Nama     *string `form:"nama"`
+	Email    *string `form:"email"`
+	NoTelp   *string `form:"notelp"`
+	Password *string `form:"password"`
+	IsAdmin  *bool   `form:"is_admin"`
 }
 
 type LoginRequest struct {
-	Email    *string `json:"email"`
-	Password *string `json:"password"`
+	Email    *string `form:"email"`
+	Password *string `form:"password"`
 }
