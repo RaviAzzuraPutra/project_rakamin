@@ -5,6 +5,7 @@ import (
 	"last-project/app/config"
 	"last-project/app/config/app_config"
 	"last-project/app/database"
+	"last-project/app/router/alamat_router"
 	"last-project/app/router/auth_router"
 	"last-project/app/router/toko_router"
 
@@ -33,9 +34,11 @@ func Bootstrap() {
 
 	AuthModules := registry.AuthRegistry()
 	TokoModules := registry.Toko_Registry()
+	AlamatModules := registry.Alamat_Registry()
 
 	auth_router.AuthRouter(app, AuthModules.AuthController)
 	toko_router.TokoRouter(app, TokoModules.TokoController)
+	alamat_router.AlamatRouter(app, AlamatModules.AlamatController)
 
 	app.Listen(app_config.PORT)
 }
