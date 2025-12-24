@@ -8,6 +8,7 @@ import (
 	"last-project/app/router/alamat_router"
 	"last-project/app/router/auth_router"
 	"last-project/app/router/toko_router"
+	"last-project/app/router/user_router"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -35,10 +36,12 @@ func Bootstrap() {
 	AuthModules := registry.AuthRegistry()
 	TokoModules := registry.Toko_Registry()
 	AlamatModules := registry.Alamat_Registry()
+	UserModules := registry.User_Registry()
 
 	auth_router.AuthRouter(app, AuthModules.AuthController)
 	toko_router.TokoRouter(app, TokoModules.TokoController)
 	alamat_router.AlamatRouter(app, AlamatModules.AlamatController)
+	user_router.UserRouter(app, UserModules.UserController)
 
 	app.Listen(app_config.PORT)
 }
