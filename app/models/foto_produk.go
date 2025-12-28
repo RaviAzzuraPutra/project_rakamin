@@ -8,4 +8,6 @@ type FotoProduk struct {
 	URL       *string `json:"url"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
+
+	Produk Produk `gorm:"foreignKey:IDProduk;references:ID;constraint:OnDelete:CASCADE"`
 }

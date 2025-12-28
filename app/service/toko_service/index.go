@@ -3,16 +3,16 @@ package toko_service
 import (
 	"errors"
 	"last-project/app/models"
-	toko_interfcae_repository "last-project/app/repository/interface/toko_interface_repository"
+	"last-project/app/repository/interface/toko_interface_repository"
 	"last-project/app/request"
 	"last-project/app/utils"
 )
 
 type Toko_Service struct {
-	repository toko_interfcae_repository.Toko_Interface_Repository
+	repository toko_interface_repository.Toko_Interface_Repository
 }
 
-func NewTokoServiceRegistry(repository toko_interfcae_repository.Toko_Interface_Repository) *Toko_Service {
+func NewTokoServiceRegistry(repository toko_interface_repository.Toko_Interface_Repository) *Toko_Service {
 	return &Toko_Service{
 		repository: repository,
 	}

@@ -1,4 +1,4 @@
-package toko_interfcae_repository
+package toko_interface_repository
 
 import "last-project/app/models"
 
