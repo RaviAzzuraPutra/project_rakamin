@@ -8,6 +8,7 @@ import (
 	"last-project/app/router/alamat_router"
 	"last-project/app/router/auth_router"
 	"last-project/app/router/category_router"
+	"last-project/app/router/foto_router"
 	"last-project/app/router/product_router"
 	"last-project/app/router/toko_router"
 	"last-project/app/router/user_router"
@@ -41,6 +42,7 @@ func Bootstrap() {
 	UserModules := registry.User_Registry()
 	CategoryModules := registry.Category_Registry()
 	ProductModules := registry.Product_Registry()
+	FotoModules := registry.Foto_Registry()
 
 	auth_router.AuthRouter(app, AuthModules.AuthController)
 	toko_router.TokoRouter(app, TokoModules.TokoController)
@@ -48,6 +50,7 @@ func Bootstrap() {
 	user_router.UserRouter(app, UserModules.UserController)
 	category_router.CategoryRouter(app, CategoryModules.CategoryController)
 	product_router.ProductRouter(app, ProductModules.Product_Controller)
+	foto_router.FotoRouter(app, FotoModules.FotoController)
 
 	app.Listen(app_config.PORT)
 }
