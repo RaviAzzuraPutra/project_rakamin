@@ -11,4 +11,5 @@ type Product_Interface_Repository interface {
 	Delete(IDProduct string, IDToko string) error
 	GetById(IDProduct string) (*models.Produk, error)
 	GetByIdToko(IDToko string) ([]models.Produk, error)
+	ReduceStock(IDProduct string, IDToko string, qty int) error
 }

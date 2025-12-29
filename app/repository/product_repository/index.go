@@ -85,3 +85,9 @@ func (repo *Product_Repository) CreateFoto(foto *models.FotoProduk) error {
 
 	return errCreate
 }
+
+func (repo *Product_Repository) ReduceStock(IDProduct string, IDToko string, qty int) error {
+	result := repo.DB.Table("produks").Where("id = ? AND id_toko = ? AND stok >= ?", IDProduct, IDToko, qty).Update("stok", gorm.Expr("stok - ?", qty)).Error
+
+	return result
+}

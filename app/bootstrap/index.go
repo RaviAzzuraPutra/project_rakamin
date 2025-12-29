@@ -11,6 +11,7 @@ import (
 	"last-project/app/router/foto_router"
 	"last-project/app/router/product_router"
 	"last-project/app/router/toko_router"
+	"last-project/app/router/trx_router"
 	"last-project/app/router/user_router"
 
 	"github.com/gofiber/fiber/v2"
@@ -43,6 +44,7 @@ func Bootstrap() {
 	CategoryModules := registry.Category_Registry()
 	ProductModules := registry.Product_Registry()
 	FotoModules := registry.Foto_Registry()
+	TrxModules := registry.Trx_Registry()
 
 	auth_router.AuthRouter(app, AuthModules.AuthController)
 	toko_router.TokoRouter(app, TokoModules.TokoController)
@@ -51,6 +53,7 @@ func Bootstrap() {
 	category_router.CategoryRouter(app, CategoryModules.CategoryController)
 	product_router.ProductRouter(app, ProductModules.Product_Controller)
 	foto_router.FotoRouter(app, FotoModules.FotoController)
+	trx_router.TrxRouter(app, TrxModules.TrxController)
 
 	app.Listen(app_config.PORT)
 }
